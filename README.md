@@ -1,1 +1,3 @@
 # NLP-NEWS-SUMMERIZATION
+
+This project involves using transformer models from the Hugging Face library to generate news summaries from a dataset of complete news articles. The models are fine-tuned on the news data to improve their performance in generating summaries. This project is an advanced application of natural language processing (NLP) techniques, as it involves using state-of-the-art transformer models and adapting them to a specific task. The goal of this project is to create a summary generation system that can provide readers with a concise overview of news articles, allowing them to quickly determine the main points and decide whether they want to read the full article.
