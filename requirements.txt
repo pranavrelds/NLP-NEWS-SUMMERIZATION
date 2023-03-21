@@ -6,3 +6,4 @@ from_root
 torch
 flask
 flask_cors
+python-dotenv
