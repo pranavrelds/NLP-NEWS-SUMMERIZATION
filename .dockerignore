@@ -1,0 +1,7 @@
+artifacts/
+lighting_logs/
+logs/
+prediction_artifacts/
+demo.py
+templete.py
+env/
