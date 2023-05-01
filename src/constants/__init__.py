@@ -21,3 +21,21 @@ LEARNING_RATE: float = 2e-5
 EPOCHS: int = 1
 BATCH_SIZE = 4
 NUM_WORKERS = 0
+
+# constants related to model evaluation
+S3_BUCKET_MODEL_URI: str = "s3://news-summerization-data/model/"
+MODEL_EVALUATION_DIR: str = "model_evaluation"
+S3_MODEL_DIR_NAME: str = "s3_model"
+IN_CHANNELS: int = 1
+BASE_LOSS: float = 10
+
+# constants related to model pusher
+MODEL_PUSHER_DIR: str = "model_pusher"
+
+# constants related to pipeline
+COLUMNS_NAME =  ['text', 'ctext']
+PRETRAINED_MODEL_NAME = "t5-small"
+
+# constants related to prediction
+PREDICTION_PIPELINE_DIR_NAME = "prediction_artifacts"
+PREDICTION_MODEL_DIR_NAME = "prediction_model"

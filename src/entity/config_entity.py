@@ -21,3 +21,22 @@ class ModelTrainerConfig:
     epochs: int = EPOCHS
     checkpoint_dir: str = os.path.join(model_trainer_artifacts_dir, CHECKPOINT_DIR)
     checkpoint_fname: str = 'best_checkpoint'
+
+@dataclass
+class ModelEvaluationConfig:
+    s3_model_path: str = S3_BUCKET_MODEL_URI
+    model_evaluation_artifacts_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR)
+    best_model_dir: str = os.path.join(model_evaluation_artifacts_dir, S3_MODEL_DIR_NAME)
+    in_channels: int = IN_CHANNELS
+    base_loss: float = BASE_LOSS
+
+
+@dataclass
+class PredictionPipelineConfig:
+    s3_model_path: str = S3_BUCKET_MODEL_URI
+    input_max_length: int = 400
+    output_max_length: int = 100
+    num_beams: int = 4
+    base_model_name: str = PRETRAINED_MODEL_NAME
+    prediction_artifact_dir = os.path.join(from_root(), PREDICTION_PIPELINE_DIR_NAME)
+    model_download_path = os.path.join(prediction_artifact_dir, PREDICTION_MODEL_DIR_NAME)
