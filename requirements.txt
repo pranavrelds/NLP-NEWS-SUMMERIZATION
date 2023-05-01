@@ -4,6 +4,8 @@ scikit-learn
 pandas
 from_root
 torch
-flask
-flask_cors
+uvicorn
+fastapi
 python-dotenv
+
+-e.

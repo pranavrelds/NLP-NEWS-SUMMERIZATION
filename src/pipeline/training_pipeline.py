@@ -11,11 +11,13 @@ from src.components.model_trainer import ModelTrainer
 from src.components.data_loader import NewsDataLoader
 from src.components.model_finetuner import T5smallFinetuner
 from src.components.model_evaluation import ModelEvaluation
+from src.components.model_pusher import ModelPusher
 
 class TrainingPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
         self.model_trainer_config = ModelTrainerConfig()
+        self.model_evaluation_config = ModelEvaluationConfig()
         
     def start_data_ingestion(self) -> DataIngestionArtifacts:
         logging.info("Starting data ingestion in training pipeline")
@@ -24,7 +26,7 @@ class TrainingPipeline:
             data_ingestion_artifacts = data_ingestion.initiate_data_ingestion()
             logging.info("Data ingestion step completed successfully in train pipeline")
             return data_ingestion_artifacts
-            
+
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -70,6 +72,31 @@ class TrainingPipeline:
             model_evaluation_artifacts = model_evaluation.initiate_evaluation()
             logging.info("Model evaluation step completed successfully in train pipeline")
             return model_evaluation_artifacts
+
+        except Exception as e:
+            raise CustomException(e, sys)
+
+    def start_model_pusher(self, model_evaluation_artifacts: ModelEvaluationArtifacts):
+        logging.info("Starting model pusher in training pipeline")
+        try: 
+            model_pusher = ModelPusher(model_evaluation_artifacts=model_evaluation_artifacts)
+            logging.info("If model is accepted in model evaluation. Pushing the model into production storage")
+            model_pusher_artifacts = model_pusher.initiate_model_pusher()
+            logging.info("Model pusher step completed successfully in train pipeline")
+            return model_pusher_artifacts
+
+        except Exception as e:
+            raise CustomException(e, sys)
+
+
+    def run_pipeline(self) -> None:
+        logging.info("Initializing training pipeline")
+        try:
+            data_ingestion_artifacts = self.start_data_ingestion()
+            model_trainer_artifacts = self.start_model_training(data_ingestion_artifacts=data_ingestion_artifacts)
+            model_evaluation_artifacts = self.start_model_evaluation(model_trainer_artifacts=model_trainer_artifacts)            
+            model_pusher_artifact = self.start_model_pusher(model_evaluation_artifacts=model_evaluation_artifacts)
+            logging.info("Training pipeline completed")
 
         except Exception as e:
             raise CustomException(e, sys)
