@@ -1,5 +1,5 @@
 # NLP-NEWS-SUMMERIZATION
-This NLP project uses transformer models from Hugging Face to automatically generate news summaries from complete news articles. The transformer models are fine-tuned on a dataset of news articles and their summaries. This allows the models to learn to identify the most important information in a news article and generate a summary that captures the main points.
+This NLP project uses a transformer model (t5-small) from Hugging Face to generate news summaries from complete news articles. The transformer model is fine-tuned on a dataset of news articles and their summaries. This allows the model to learn to identify the most important information in a news article and generate a summary that captures the main points.
 
 The extractive text summarization method is used to generate the summaries. This method identifies the most important sentences in the news article and then combines them to form a summary. The sentences are selected based on their relevance to the topic of the article, their importance, and their readability.
 
